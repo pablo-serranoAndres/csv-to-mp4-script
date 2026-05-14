@@ -11,12 +11,12 @@ This script provides a seamless workflow for processing ISO image collections. I
 The script relies on a specific directory structure. You must define the following path variables in your PowerShell environment or at the beginning of the script:
 
 ```powershell
-$GENERAL_DIR  = "K:\HandBrake\"
-$CSV_DIR      = $GENERAL_DIR + "files_to_migrate\"
-$ISO_DIR      = $GENERAL_DIR + "iso\"
-$UPLOAD_DIR   = $GENERAL_DIR + "uploads\"
-$HANDBRAKE    = $GENERAL_DIR + "HandBrakeCLI.exe"
-$MIGRATED_DIR = $GENERAL_DIR + "migrated\"
+$GENERAL_DIR  =
+$CSV_DIR      =
+$ISO_DIR      =
+$UPLOAD_DIR   =
+$HANDBRAKE    =
+$MIGRATED_DIR =
 ```
 
 ## 📁 File Classification
