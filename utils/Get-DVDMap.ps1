@@ -1,12 +1,11 @@
-using module "./modules/DVDPosition.psm1"
+using module "..\modules\DVDPosition.psm1"
 
 function Get-DVDMap {
     param(
         [Parameter(Mandatory=$true)][string]$iso_file_path
-        [Parameter(Mandatory=$true)][string]$handbrake
     )
     
-    $scan = & $HANDBRAKE -i $iso_file_path -t 0 --scan 2>&1
+    $scan = & "K:\HandBrake\HandBrakeCLI.exe" -i $iso_file_path -t 0 --scan 2>&1
 
     $focus_info = @()
     $DVDMap = @()
@@ -32,13 +31,15 @@ function Get-DVDMap {
 
                     $chapters--
 
-                    $DVDMap += [DVDPosition]::new(($current_title), ($chapters))
+                    $DVDMap += [DVDPosition]::new($current_title, $chapters)
 
 
                     $chapters = 0; 
                     break
 
-                } else {
+                } 
+                
+                if (-not ($focus_info[$j] -like "*duration 00:00:00") -and -not ($focus_info[$j] -like "*duration 00:00:01")-and -not ($focus_info[$j] -like "*duration 00:00:02")) {
                     $chapters++
                 }
             }
@@ -49,9 +50,4 @@ function Get-DVDMap {
 
 }
 
-$iso_file_path = "K:\HandBrake\iso\Celebraciones\04_Pablo_Bautizo_Comunion.iso"
-foreach ($row in Get-DVDMap -iso_file_path $iso_file_path) {
-    Write-Host $row.title -ForegroundColor White -BackgroundColor Red
-    Write-Host $row.chapters -ForegroundColor White -BackgroundColor Red
-}
 

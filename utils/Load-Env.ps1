@@ -10,7 +10,7 @@ function Load-Env {
 
                 [System.Environment]::SetEnvironmentVariable($name, $value)
             }
-            Write-Host "Archivo .env cargado correctamente." -ForegroundColor Cyan
+            # Write-Host "Archivo .env cargado correctamente." -ForegroundColor Cyan
         }
     } else {
         Write-Warning "No se encontró el archivo .env en $path"
